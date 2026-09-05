@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Art Gallery</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>🎨 AI Art Gallery</h1>
+
+  <h2 id="theme"></h2>
+
+  <h2>Generated Images</h2>
+
+  <div id="gallery" class="gallery"></div>
+
+  <h2>🏆 Best Image</h2>
+
+  <div id="best" class="gallery"></div>
+
+  <h2>✨ Variations</h2>
+
+  <div id="variations" class="gallery"></div>
+
+  <script>
+    fetch("gallery-data.json")
+      .then(response => response.json())
+      .then(data => {
+
+        document.getElementById("theme").textContent =
+          `Theme: ${data.theme}`;
+
+        const gallery = document.getElementById("gallery");
+
+        data.images.forEach(image => {
+          gallery.innerHTML += `
+            <div class="card">
+              <h3>${image.service}</h3>
+              <img src="${image.path}" alt="${image.service}">
+              <p>Quality Score: ${image.score}/100</p>
+            </div>
+          `;
+        });
+
+        const best = document.getElementById("best");
+
+        best.innerHTML = `
+          <div class="card">
+            <h3>${data.best.service}</h3>
+            <img src="${data.best.path}" alt="Best image">
+            <p>Quality Score: ${data.best.score}/100</p>
+          </div>
+        `;
+
+        const variations =
+          document.getElementById("variations");
+
+        data.variations.forEach(variation => {
+          variations.innerHTML += `
+            <div class="card">
+              <h3>Variation</h3>
+              <img src="${variation.path}" alt="AI variation">
+            </div>
+          `;
+        });
+
+      })
+      .catch(error => {
+        console.error("Failed to load gallery:", error);
+      });
+  </script>
+
+</body>
+</html>
