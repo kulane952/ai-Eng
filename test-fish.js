@@ -5,6 +5,7 @@ dotenv.config();
 
 const API_KEY = process.env.OPENROUTER_API_KEY;
 
+// const MODEL = "fish-audio/s2.1-pro-free:free";
 const MODEL = "fish-audio/s2.1-pro-free:free";
 
 console.log("MODEL:", MODEL);
@@ -48,7 +49,7 @@ const audio = Buffer.from(
 );
 
 await fs.writeFile(
-  "test-fish.mp3",
+  "test-anas.mp3",
   audio
 );
 

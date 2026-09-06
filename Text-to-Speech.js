@@ -39,7 +39,7 @@ const saveAudioToFile = async (audioBuffer, filename) => {
 
 // Usage
 const text =
-  "Hello, this is a test of text to speech using OpenRouter free api to use.";
+  "Hello, this is a test of text to speech using OpenRouter free api.";
 
 const audioBuffer = await textToSpeech(text);
 
