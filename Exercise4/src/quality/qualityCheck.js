@@ -2,7 +2,7 @@ const client = require("../config/openrouter");
 
 async function qualityCheck(content) {
   const response = await client.chat.completions.create({
-    model: "openai/gpt-5",
+    model: "minimax/minimax-m3:free",
     messages: [
       {
         role: "system",
